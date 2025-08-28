@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NFIET 2025 - Event Timeline</title>
+  <title>NFIET 2025 - Important Dates</title>
   <style>
     /* Reset & Base */
     * {
@@ -179,6 +179,19 @@
       color: var(--primary-color);
     }
 
+    /* Golden highlight for last date */
+    .timeline-item.last-date .content {
+      border: 2px solid gold;
+      background: #fff8dc;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    }
+
+    .timeline-item.last-date .content h2,
+    .timeline-item.last-date .content p {
+      color: #b8860b;
+      font-weight: bold;
+    }
+
     @media screen and (max-width: 768px) {
       .timeline::after {
         left: 31px;
@@ -261,43 +274,40 @@
     <!-- Timeline Section -->
     <div class="timeline-section">
       <div class="timeline-header">
-        <h1>Event Timeline</h1>
-        <p>Journey of NFIET-2025</p>
+        <h1>Important Dates</h1>
+        <p>Key Deadlines for NFIET-2025</p>
       </div>
 
       <div class="timeline">
+        <!-- Conference Date -->
         <div class="timeline-item left">
           <div class="content">
-            <h2>09:00 AM</h2>
-            <p>Opening Ceremony & Welcome Speech</p>
+            <h2>October 4, 2025</h2>
+            <p>Conference Date</p>
           </div>
         </div>
 
+        <!-- Paper Submission -->
         <div class="timeline-item right">
           <div class="content">
-            <h2>10:00 AM</h2>
-            <p>Keynote Session by Guest Speaker</p>
+            <h2>September 15, 2025</h2>
+            <p>Paper Submission Deadline</p>
           </div>
         </div>
 
+        <!-- Acceptance Notification -->
         <div class="timeline-item left">
           <div class="content">
-            <h2>12:00 PM</h2>
-            <p>Networking Break & Refreshments</p>
+            <h2>November 20, 2025</h2>
+            <p>Acceptance Notification</p>
           </div>
         </div>
 
-        <div class="timeline-item right">
+        <!-- Camera Ready Submission (Golden) -->
+        <div class="timeline-item right last-date">
           <div class="content">
-            <h2>02:00 PM</h2>
-            <p>Workshops & Panel Discussions</p>
-          </div>
-        </div>
-
-        <div class="timeline-item left">
-          <div class="content">
-            <h2>05:00 PM</h2>
-            <p>Closing Remarks & Group Photo</p>
+            <h2>November 25, 2025</h2>
+            <p>Camera Ready Submission</p>
           </div>
         </div>
       </div>
@@ -309,22 +319,6 @@
     function toggleMenu() {
       document.getElementById("sidebar").classList.toggle("active");
     }
-
-    // Highlight upcoming event
-    const items = document.querySelectorAll(".timeline-item");
-    const now = new Date();
-    let currentHour = now.getHours();
-
-    items.forEach(item => {
-      const timeText = item.querySelector("h2").innerText;
-      let eventHour = parseInt(timeText);
-      if (timeText.includes("PM") && eventHour !== 12) {
-        eventHour += 12;
-      }
-      if (eventHour >= currentHour) {
-        item.querySelector(".content").style.border = "2px solid #f39c12";
-      }
-    });
   </script>
 </body>
 

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFIET-2025 - National Conference on Future Innovation Engineering & Technology</title>
+    <meta name="description"
+        content="National Conference on Future Innovation Engineering & Technology organized by Department of Electronics & Telecommunication, SVPCET Nagpur">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Ocean-inspired color palette - exact match to React version */
+            --background: 240 10% 3.9%;
+            --foreground: 0 0% 98%;
+            --card: 240 10% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --primary: 195 100% 39%;
+            --primary-foreground: 0 0% 98%;
+            --primary-glow: 195 100% 50%;
+            --secondary: 195 53% 15%;
+            --secondary-foreground: 0 0% 98%;
+            --accent: 186 100% 94%;
+            --accent-foreground: 195 100% 25%;
+            --muted: 240 4.8% 15.9%;
+            --muted-foreground: 240 5% 64.9%;
+            --border: 240 3.7% 15.9%;
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+            --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(195 53% 15%));
+            --gradient-card: linear-gradient(145deg, hsl(195 53% 15%), hsl(195 53% 12%));
+            --gradient-hero: linear-gradient(135deg, hsl(195 100% 39%), hsl(195 53% 25%), hsl(195 100% 25%));
+
+            /* Shadows */
+            --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+            --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
+            --shadow-ocean: 0 8px 32px hsl(195 100% 39% / 0.2);
+
+            /* Transitions */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gradient-subtle);
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fade-up 0.6s ease-out forwards;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 256px;
+            height: 100vh;
+            background: var(--gradient-hero);
+            color: white;
+            padding: 24px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 40;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .sidebar-title {
+            font-size: 30px;
+            font-weight: bold;
+            background: linear-gradient(to right, #fde047, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sidebar-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            padding: 0px 0px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .sidebar-footer {
+            margin-top: 32px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(12px);
+        }
+
+        .sidebar-footer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-footer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* Mobile menu button */
+        .menu-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 50;
+            background: hsl(var(--primary));
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .menu-toggle:hover {
+            background: hsl(var(--primary) / 0.8);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 30;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            height: 70vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://stvincentngp.edu.in/img/pages/pages_1631871099.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            padding: 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 72px);
+            font-weight: bold;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            animation-delay: 0s;
+        }
+
+        .hero .gradient-text {
+            background: linear-gradient(to right, #67e8f9, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 600;
+            margin-bottom: 16px;
+            animation-delay: 0.2s;
+        }
+
+        .hero-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 18px;
+            margin-bottom: 24px;
+            animation-delay: 0.4s;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: hsl(var(--primary) / 0.9);
+            color: hsl(var(--primary-foreground));
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            animation-delay: 0.6s;
+        }
+
+        /* Content sections */
+        .content {
+            padding: 48px 24px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        /* Grid layouts */
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--gradient-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-ocean);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-smooth);
+            margin-top: 30px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .card-header {
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: hsl(var(--foreground));
+            margin-bottom: 4px;
+        }
+
+        .card-description {
+            color: hsl(var(--muted-foreground));
+            font-size: 14px;
+        }
+
+        .card-content {
+            color: hsl(var(--foreground));
+        }
+
+        /* Countdown specific */
+        .countdown-card {
+            margin: 30px 0;
+            width: 500px;
+            height: 200px;
+        }
+
+        .countdown-title {
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 24px;
+            color: hsl(var(--primary));
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 16px;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-value {
+            background: hsl(var(--primary));
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 16px;
+            border-radius: 8px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .countdown-label {
+            font-size: 14px;
+            color: hsl(var(--muted-foreground));
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-elegant);
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-right: 8px;
+        }
+
+        .badge-secondary {
+            background: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+        }
+
+        .badge-outline {
+            background: transparent;
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+        }
+
+        /* Icon containers */
+        .icon-container {
+            width: 48px;
+            height: 48px;
+            background: hsl(var(--primary) / 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--primary));
+        }
+
+        .icon-large {
+            width: 48px;
+            height: 48px;
+            color: hsl(var(--primary));
+            margin: 0 auto 16px;
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: hsl(var(--primary));
+        }
+
+        .text-muted {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .mb-6 {
+            margin-bottom: 24px;
+        }
+
+        .mt-6 {
+            margin-top: 24px;
+        }
+
+        .p-4 {
+            padding: 16px;
+        }
+
+        .leading-relaxed {
+            line-height: 1.8;
+        }
+
+        .bg-primary-light {
+            background: hsl(var(--primary) / 0.05);
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* From Uiverse.io by vinodjangid07 */
+
+        .tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            background-color: rgb(252, 252, 252);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background-color: rgb(223, 223, 223);
+        }
+
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .main {
+                margin-left: 256px;
+            }
+
+            .sidebar {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .overlay {
+                display: none;
+            }
+
+            .grid-md-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-md-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .lg-col-span-2 {
+                grid-column: span 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-lg-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-lg-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .content {
+                padding: 24px 16px;
+            }
+
+            .grid {
+                gap: 16px;
+            }
+
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Your whole site content goes here -->
+
+
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <span id="menu-icon">☰</span>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">NFIET-2025</h2>
+            <p class="sidebar-subtitle">National Conference</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- Home -->
+            <a href="index.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 104 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="width: 28px; height: 28px;">
+                            <path
+                                d="M100.5 40.75V96.5H66V68.5V65H62.5H43H39.5V68.5V96.5H3.5V40.75L52 4.375L100.5 40.75Z"
+                                stroke="white" stroke-width="7" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Home</span>
+            </a>
+
+            <!-- Conference Themes (document icon) -->
+            <a href="themes.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Conference Themes</span>
+            </a>
+
+            <!-- Important Dates (calendar icon) -->
+            <a href="timeline.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Important Dates</span>
+            </a>
+
+            <a href="poster.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
+                        </svg>
+
+                    </div>
+                </span>
+                <span>Poster</span>
+            </a>
+
+            <!-- Registration (people icon) -->
+            <a href="register.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Registration</span>
+            </a>
+
+            <!-- Contact (phone icon) -->
+            <a href="contact.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path
+                                d="M22 16.92V21a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 12.8 19.86 19.86 0 0 1 0 4.18 2 2 0 0 1 2 2h4.09a2 2 0 0 1 2 1.72c.12.9.37 1.77.72 2.58a2 2 0 0 1-.45 2.11L7 10a16 16 0 0 0 7 7l1.59-1.36a2 2 0 0 1 2.11-.45c.81.35 1.68.6 2.58.72A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Contact</span>
+            </a>
+        </nav>
+
+
+        <div class="sidebar-footer">
+            <h4>Organized by</h4>
+            <p>Department of Electronics & Telecommunication, SVPCET Nagpur</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1 class="animate-fade-up">
+                    National Conference on Future Innovation
+                    <br />
+                    <span class="gradient-text">Engineering & Technology</span>
+                </h1>
+                <div class="hero-subtitle animate-fade-up">(NFIET-2025)</div>
+                <div class="hero-date animate-fade-up">
+                    <span class="font-bold">4th October 2025</span>
+                </div>
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"
+                        style="width: 18px; height: 18px; margin-right: 6px; vertical-align: middle;">
+                        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Department of Electronics & Telecommunication, SVPCET Nagpur
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <div class="content">
+            <!-- Countdown & Quick Actions -->
+            <div class="section grid grid-cols-1 grid-lg-3">
+                <div class="lg-col-span-2">
+                    <!-- Countdown Timer -->
+                    <div class="card countdown-card">
+                        <h3 class="countdown-title">Conference Countdown</h3>
+                        <div class="countdown-grid" id="countdown">
+                            <div class="countdown-item">
+                                <div class="countdown-value" id="days">00</div>
+                                <div class="countdown-label">Days</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-value" id="hours">00</div>
+                                <div class="countdown-label">Hours</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-value" id="minutes">00</div>
+                                <div class="countdown-label">Minutes</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-value" id="seconds">00</div>
+                                <div class="countdown-label">Seconds</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1" style="gap: 16px;">
+                    <!-- Download Brochure -->
+                    <div class="card text-center">
+                        <div class="icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#007BFF" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width: 48px; height: 48px;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                        </div>
+
+                        <h3 class="font-semibold mb-2">Conference Brochure</h3>
+                        <p class="text-muted mb-4" style="font-size: 14px;">
+                            Download detailed information about NFIET-2025
+                        </p>
+                        <a href="Brochure.pdf">
+                            <button class="btn">
+                                Download PDF
+                            </button>
+                        </a>
+                    </div>
+
+                    <!-- Registration -->
+                    <div class="card text-center">
+                        <div class="icon-large">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#007BFF" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width: 48px; height: 48px;">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+
+                        <h3 class="font-semibold mb-2">Registration</h3>
+                        <p class="text-muted mb-4" style="font-size: 14px;">
+                            Register now for early bird discounts
+                        </p>
+                        <a href="register.html">
+                            <button class="btn">
+                                Register Now
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Sections -->
+            <div class="section grid grid-cols-1 grid-lg-2">
+                <!-- About Department -->
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="icon-container">
+                                <span style="font-size: 24px;">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023" />
+                                    </svg>
+
+                                </span>
+                            </div>
+                            <div>
+                                <div class="card-title">About Department</div>
+                                <div class="card-description">Electronics & Telecommunication Engineering</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted leading-relaxed mb-4">
+                            The Department of Electronics & Telecommunication Engineering at St. Vincent Pallotti
+                            College of Engineering &
+                            Technology is committed to imparting quality education, fostering innovation, and developing
+                            industry-ready
+                            professionals.
+                        </p>
+                        <p class="text-muted leading-relaxed mb-4">
+                            The department offers a dynamic learning environment enriched with state-of-the-art
+                            laboratories, experienced
+                            faculty, and a curriculum that bridges theory with practical applications in modern
+                            communication and
+                            electronics technologies.
+                        </p>
+                        <div class="bg-primary-light">
+                            <h4 class="font-semibold text-primary mb-2">Student Forum - Electel</h4>
+                            <p style="font-size: 14px;" class="text-muted">
+                                Formed under the prestigious Institution of Electronics and Telecommunication Engineers
+                                (IETE),
+                                serving as a vibrant platform for workshops, seminars, competitions, and conferences.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About SVPCET -->
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="icon-container">
+                                <span style="font-size: 24px;">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z" />
+                                    </svg>
+
+                                </span>
+                            </div>
+                            <div>
+                                <div class="card-title">About SVPCET</div>
+                                <div class="card-description">St. Vincent Pallotti College of Engineering & Technology
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div style="margin-bottom: 16px;">
+                            <span class="badge badge-secondary">NAAC 'A' Accredited</span>
+                            <span class="badge badge-outline">Established 2004</span>
+                        </div>
+                        <p class="text-muted leading-relaxed mb-4">
+                            St. Vincent Pallotti College of Engineering & Technology, Nagpur, established in 2004 by the
+                            Nagpur Pallottine
+                            Society, is a premier institution renowned for academic excellence and strong placements.
+                        </p>
+                        <p class="text-muted leading-relaxed">
+                            Offering UG and PG programs in Computer, Mechanical, Electrical, and allied branches, along
+                            with research
+                            degrees, SVPCET combines cutting-edge infrastructure with industry-aligned learning to shape
+                            globally competent
+                            engineers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About NFIET -->
+            <div class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div class="icon-container">
+                                <span style="font-size: 24px;">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 9a3 3 0 0 1 3-3m-2 15h4m0-3c0-4.1 4-4.9 4-9A6 6 0 1 0 6 9c0 4 4 5 4 9h4Z" />
+                                    </svg>
+
+                                </span>
+                            </div>
+                            <div>
+                                <div class="card-title" style="font-size: 24px;">About NFIET</div>
+                                <div class="card-description">National Conference for Future Engineers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted leading-relaxed" style="font-size: 18px; margin-bottom: 24px;">
+                            The National Conference for Future Engineers (NFIET), organized by the Department of
+                            Electronics &
+                            Telecommunication Engineering under its IETE forum Electel, is a multidisciplinary platform
+                            designed for UG and
+                            PG students.
+                        </p>
+                        <p class="text-muted leading-relaxed mb-6">
+                            The conference encourages participants to present papers and posters while promoting
+                            research, innovation, and
+                            technical excellence across diverse engineering domains. It serves as a vibrant platform for
+                            sharing knowledge,
+                            exchanging ideas, and fostering collaboration between academia and industry.
+                        </p>
+
+                        <div class="grid grid-cols-1 grid-md-3 mt-6">
+                            <div class="text-center p-4 bg-primary-light">
+                                <div style="font-size: 32px; margin-bottom: 8px;">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z" />
+                                    </svg>
+
+                                </div>
+                                <h4 class="font-semibold">Research Excellence</h4>
+                                <p style="font-size: 14px;" class="text-muted">Promoting cutting-edge research</p>
+                            </div>
+                            <div class="text-center p-4 bg-primary-light">
+                                <div style="font-size: 32px; margin-bottom: 8px;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        style="width: 26px; height: 26px;">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold">Knowledge Sharing</h4>
+                                <p style="font-size: 14px;" class="text-muted">Platform for idea exchange</p>
+                            </div>
+                            <div class="text-center p-4 bg-primary-light">
+                                <div style="font-size: 32px; margin-bottom: 8px;">
+                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                        viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z" />
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold">Industry Connect</h4>
+                                <p style="font-size: 14px;" class="text-muted">Academia-industry collaboration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>&copy; 2025 NFIET - National Conference on Future Innovation Engineering & Technology</p>
+                <p style="font-size: 14px; margin-top: 8px;">Organized by Department of Electronics &
+                    Telecommunication,
+                    SVPCET Nagpur</p>
+            </footer>
+        </div>
+    </main>
+
+
+    <script>
+        // Sidebar functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            menuIcon.textContent = sidebar.classList.contains('open') ? '×' : '☰';
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            menuIcon.textContent = '☰';
+        }
+
+        // Countdown timer functionality
+        function updateCountdown() {
+            const eventDate = new Date("October 4, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = eventDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation delays for hero elements
+        document.addEventListener('DOMContentLoaded', function () {
+            const heroElements = document.querySelectorAll('.hero .animate-fade-up');
+            heroElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+</body>
+
+</html>

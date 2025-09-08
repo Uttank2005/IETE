@@ -392,6 +392,35 @@
             transform: scale(1.03);
         }
 
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-elegant);
+            border: none;
+            cursor: pointer;
+            width: 30%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+        }
+
         /* Responsive */
         @media (min-width: 768px) {
             .main {
@@ -509,7 +538,8 @@
                 <span>
                     <div class="tab" style="background-color: transparent;">
                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="none" viewBox="0 0 24 24">
+                            xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="none"
+                            viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
                         </svg>
@@ -548,19 +578,6 @@
                 </span>
                 <span>Contact</span>
             </a>
-
-            <a href="members.html" class="sidebar-link active" onclick="closeSidebar()">
-                <span>
-                    <div class="tab" style="background-color: transparent;">
-                        <svg class="w-[26px] h-[26px] text-gray-800 dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3.78552 9.5 12.7855 14l9-4.5-9-4.5-8.99998 4.5Zm0 0V17m3-6v6.2222c0 .3483 2 1.7778 5.99998 1.7778 4 0 6-1.3738 6-1.7778V11" />
-                        </svg>
-                    </div>
-                </span>
-                <span>Committee</span>
-            </a>
         </nav>
 
         <div class="sidebar-footer">
@@ -571,6 +588,15 @@
 
     <!-- Main Content -->
     <div class="main">
+        <div class="poster-section">
+            <h2>IEEE Format</h2>
+            <!-- Replace "poster.jpg" with your actual poster file -->
+            <a href="IEEE-Template.pdf">
+                <button class="btn">
+                    Download Format
+                </button>
+            </a>
+        </div>
         <div class="poster-section">
             <h2>Conference Poster</h2>
             <!-- Replace "poster.jpg" with your actual poster file -->
@@ -615,6 +641,5 @@
         });
     </script>
 </body>
-
 
 </html>

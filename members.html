@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Committee - NFIET-2025 | National Conference on Future Innovation Engineering & Technology</title>
+    <meta name="description"
+        content="Meet the organizing committee of NFIET-2025 - National Conference on Future Innovation Engineering & Technology organized by Department of Electronics & Telecommunication, SVPCET Nagpur">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Ocean-inspired color palette - exact match to React version */
+            --background: 240 10% 3.9%;
+            --foreground: 0 0% 98%;
+            --card: 240 10% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --primary: 195 100% 39%;
+            --primary-foreground: 0 0% 98%;
+            --primary-glow: 195 100% 50%;
+            --secondary: 195 53% 15%;
+            --secondary-foreground: 0 0% 98%;
+            --accent: 186 100% 94%;
+            --accent-foreground: 195 100% 25%;
+            --muted: 240 4.8% 15.9%;
+            --muted-foreground: 240 5% 64.9%;
+            --border: 240 3.7% 15.9%;
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+            --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(195 53% 15%));
+            --gradient-card: linear-gradient(145deg, hsl(195 53% 15%), hsl(195 53% 12%));
+            --gradient-hero: linear-gradient(135deg, hsl(195 100% 39%), hsl(195 53% 25%), hsl(195 100% 25%));
+
+            /* Shadows */
+            --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+            --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
+            --shadow-ocean: 0 8px 32px hsl(195 100% 39% / 0.2);
+
+            /* Transitions */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gradient-subtle);
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fade-up 0.6s ease-out forwards;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 256px;
+            height: 100vh;
+            background: var(--gradient-hero);
+            color: white;
+            padding: 24px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 40;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .sidebar-title {
+            font-size: 30px;
+            font-weight: bold;
+            background: linear-gradient(to right, #fde047, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sidebar-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            padding: 0px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            background-color: rgb(252, 252, 252);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background-color: rgb(223, 223, 223);
+        }
+
+        .sidebar-footer {
+            margin-top: 32px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(12px);
+        }
+
+        .sidebar-footer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-footer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* Mobile menu button */
+        .menu-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 50;
+            background: hsl(var(--primary));
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .menu-toggle:hover {
+            background: hsl(var(--primary) / 0.8);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 30;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            height: 24rem;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('https://stvincentngp.edu.in/img/pages/pages_1631871099.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            color: white;
+            padding: 32px;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: bold;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero .gradient-text {
+            background: linear-gradient(to right, #67e8f9, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 4vw, 28px);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .hero-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 18px;
+        }
+
+        /* Content sections */
+        .content {
+            padding: 48px 24px;
+            max-width: 1792px;
+            margin: 0 auto;
+        }
+
+        /* Ocean card styles */
+        .ocean-card {
+            background: var(--gradient-card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-ocean);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-smooth);
+        }
+
+        .ocean-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Committee member cards */
+        .member-card {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .member-card:hover {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .member-image {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid hsl(var(--primary) / 0.2);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: hsl(var(--foreground));
+            margin-bottom: 4px;
+        }
+
+        .member-role {
+            color: hsl(var(--primary));
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .member-designation {
+            color: hsl(var(--muted-foreground));
+            font-size: 14px;
+        }
+
+        /* Grid layouts */
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+
+        .grid-1 {
+            grid-template-columns: 1fr;
+            max-width: 384px;
+            margin: 0 auto;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 512px;
+            margin: 0 auto;
+        }
+
+        .grid-responsive {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        /* Section styling */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            text-center: center;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: hsl(var(--foreground));
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            color: hsl(var(--muted-foreground));
+            max-width: 512px;
+            margin: 0 auto;
+        }
+
+        /* Button styles */
+        .btn-gradient {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-elegant);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Icon containers */
+        .icon-container {
+            width: 48px;
+            height: 48px;
+            background: hsl(var(--primary) / 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: hsl(var(--primary));
+            margin: 0 auto 24px;
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: hsl(var(--primary));
+        }
+
+        .text-muted {
+            color: hsl(var(--muted-foreground));
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: bold;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .mb-4 {
+            margin-bottom: 16px;
+        }
+
+        .mb-6 {
+            margin-bottom: 24px;
+        }
+
+        .mt-6 {
+            margin-top: 24px;
+        }
+
+        .leading-relaxed {
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .main {
+                margin-left: 256px;
+            }
+
+            .sidebar {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .overlay {
+                display: none;
+            }
+
+            .grid-md-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-md-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid-md-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .content {
+                padding: 24px 16px;
+            }
+
+            .grid {
+                gap: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <span id="menu-icon">☰</span>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">NFIET-2025</h2>
+            <p class="sidebar-subtitle">National Conference</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- Home -->
+            <a href="index.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 104 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="width: 28px; height: 28px;">
+                            <path
+                                d="M100.5 40.75V96.5H66V68.5V65H62.5H43H39.5V68.5V96.5H3.5V40.75L52 4.375L100.5 40.75Z"
+                                stroke="white" stroke-width="7" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Home</span>
+            </a>
+
+            <!-- Conference Themes -->
+            <a href="themes.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Conference Themes</span>
+            </a>
+
+            <!-- Important Dates -->
+            <a href="timeline.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Important Dates</span>
+            </a>
+
+            <!-- Committee (Active) -->
+
+            <!-- Poster -->
+            <a href="poster.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path
+                                d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Poster</span>
+            </a>
+
+            <!-- Registration -->
+            <a href="register.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Registration</span>
+            </a>
+
+            <!-- Contact -->
+            <a href="contact.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path
+                                d="M22 16.92V21a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 12.8 19.86 19.86 0 0 1 0 4.18 2 2 0 0 1 2 2h4.09a2 2 0 0 1 2 1.72c.12.9.37 1.77.72 2.58a2 2 0 0 1-.45 2.11L7 10a16 16 0 0 0 7 7l1.59-1.36a2 2 0 0 1 2.11-.45c.81.35 1.68.6 2.58.72A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Contact</span>
+            </a>
+
+            <a href="members.html" class="sidebar-link active" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg class="w-[26px] h-[26px] text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3.78552 9.5 12.7855 14l9-4.5-9-4.5-8.99998 4.5Zm0 0V17m3-6v6.2222c0 .3483 2 1.7778 5.99998 1.7778 4 0 6-1.3738 6-1.7778V11" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Committee</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <h4>Organized by</h4>
+            <p>Department of Electronics & Telecommunication, SVPCET Nagpur</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="animate-fade-up">
+                    Organizing
+                    <br />
+                    <span class="gradient-text">Committee</span>
+                </h1>
+                <div class="hero-subtitle animate-fade-up">NFIET-2025</div>
+                <div class="hero-date animate-fade-up">
+                    <span class="font-bold">4th October 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Committee Content -->
+        <div class="content">
+            <!-- Introduction -->
+            <div class="text-center mb-16">
+                <div class="ocean-card" style="padding: 32px; max-width: 1024px; margin: 0 auto;">
+                    <div style="align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px;">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <h2 style="font-size: 32px; font-weight: bold; color: hsl(var(--foreground));">Meet Our Team</h2>
+                    </div>
+                    <p class="text-muted leading-relaxed" style="font-size: 18px;">
+                        The success of NFIET-2025 is made possible by the dedicated efforts of our organizing committee.
+                        From esteemed faculty members to enthusiastic students, each member brings unique expertise and
+                        passion to create an exceptional conference experience for all participants.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Patron Section -->
+            <section class="section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Patron</h2>
+                    <p class="section-description">Providing visionary leadership and guidance for the conference</p>
+                </div>
+                <div class="grid grid-1">
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+                                alt="Dr. Rajesh Kumar Sharma" />
+                        </div>
+                        <h3 class="member-name">Dr. Rajesh Kumar Sharma</h3>
+                        <p class="member-role">Patron</p>
+                        <p class="member-designation">Principal, SVPCET Nagpur</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conveners Section -->
+            <section class="section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Conveners</h2>
+                    <p class="section-description">Leading the conference organization and ensuring academic excellence</p>
+                </div>
+                <div class="grid grid-2 grid-md-2">
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616c0763c55?w=300&h=300&fit=crop&crop=face"
+                                alt="Dr. Priya Mehta" />
+                        </div>
+                        <h3 class="member-name">Dr. Priya Mehta</h3>
+                        <p class="member-role">Conference Convener</p>
+                        <p class="member-designation">Head of Department, E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
+                                alt="Dr. Amit Singh" />
+                        </div>
+                        <h3 class="member-name">Dr. Amit Singh</h3>
+                        <p class="member-role">Co-Convener</p>
+                        <p class="member-designation">Professor, E&TC Department</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Organizing Committee Section -->
+            <section class="section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Organizing Committee</h2>
+                    <p class="section-description">Faculty members coordinating various aspects of the conference</p>
+                </div>
+                <div class="grid grid-responsive grid-md-4">
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face"
+                                alt="Dr. Sneha Patel" />
+                        </div>
+                        <h3 class="member-name">Dr. Sneha Patel</h3>
+                        <p class="member-role">Technical Chair</p>
+                        <p class="member-designation">Assistant Professor, E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face"
+                                alt="Dr. Vikram Gupta" />
+                        </div>
+                        <h3 class="member-name">Dr. Vikram Gupta</h3>
+                        <p class="member-role">Program Chair</p>
+                        <p class="member-designation">Associate Professor, E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face"
+                                alt="Prof. Anita Rao" />
+                        </div>
+                        <h3 class="member-name">Prof. Anita Rao</h3>
+                        <p class="member-role">Registration Chair</p>
+                        <p class="member-designation">Assistant Professor, E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face"
+                                alt="Prof. Manoj Joshi" />
+                        </div>
+                        <h3 class="member-name">Prof. Manoj Joshi</h3>
+                        <p class="member-role">Publication Chair</p>
+                        <p class="member-designation">Assistant Professor, E&TC</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Student Members Section -->
+            <section class="section">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Student Members</h2>
+                    <p class="section-description">Energetic student volunteers making the conference a memorable experience</p>
+                </div>
+                <div class="grid grid-responsive grid-md-4">
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face"
+                                alt="Arjun Sharma" />
+                        </div>
+                        <h3 class="member-name">Arjun Sharma</h3>
+                        <p class="member-role">Student Coordinator</p>
+                        <p class="member-designation">Final Year B.Tech E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face"
+                                alt="Kavya Nair" />
+                        </div>
+                        <h3 class="member-name">Kavya Nair</h3>
+                        <p class="member-role">Student Secretary</p>
+                        <p class="member-designation">Final Year B.Tech E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face"
+                                alt="Rohit Verma" />
+                        </div>
+                        <h3 class="member-name">Rohit Verma</h3>
+                        <p class="member-role">Technical Coordinator</p>
+                        <p class="member-designation">Final Year B.Tech E&TC</p>
+                    </div>
+                    <div class="ocean-card member-card animate-fade-up">
+                        <div class="member-image">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face"
+                                alt="Priya Singh" />
+                        </div>
+                        <h3 class="member-name">Priya Singh</h3>
+                        <p class="member-role">Event Coordinator</p>
+                        <p class="member-designation">Final Year B.Tech E&TC</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <div class="mt-16">
+                <div class="ocean-card text-center" style="padding: 32px;">
+                    <div style="align-items: center; justify-content: center; gap: 12px; margin-bottom: 24px;">
+                        <div class="icon-container">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;">
+                                <path
+                                    d="M22 16.92V21a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 12.8 19.86 19.86 0 0 1 0 4.18 2 2 0 0 1 2 2h4.09a2 2 0 0 1 2 1.72c.12.9.37 1.77.72 2.58a2 2 0 0 1-.45 2.11L7 10a16 16 0 0 0 7 7l1.59-1.36a2 2 0 0 1 2.11-.45c.81.35 1.68.6 2.58.72A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                        </div>
+                        <h2 style="font-size: 32px; font-weight: bold; color: hsl(var(--foreground));">Get in Touch</h2>
+                    </div>
+                    <p class="text-muted mb-6">
+                        Have questions about the conference? Our organizing committee is here to help.
+                    </p>
+                    <a href="contact.html" class="btn-gradient">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 NFIET - National Conference on Future Innovation Engineering & Technology</p>
+            <p style="font-size: 14px; margin-top: 8px;">Organized by Department of Electronics & Telecommunication,
+                SVPCET Nagpur</p>
+        </footer>
+    </main>
+
+    <script>
+        // Sidebar functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            menuIcon.textContent = sidebar.classList.contains('open') ? '×' : '☰';
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            menuIcon.textContent = '☰';
+        }
+
+        // Add animation delays for fade-up elements
+        document.addEventListener('DOMContentLoaded', function () {
+            const fadeUpElements = document.querySelectorAll('.animate-fade-up');
+            fadeUpElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

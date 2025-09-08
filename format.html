@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFIET-2025 - IEEE Format Guidelines</title>
+    <meta name="description"
+        content="IEEE Format Guidelines for National Conference on Future Innovation Engineering & Technology organized by Department of Electronics & Telecommunication, SVPCET Nagpur">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Ocean-inspired color palette - exact match to React version */
+            --background: 240 10% 3.9%;
+            --foreground: 0 0% 98%;
+            --card: 240 10% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --primary: 195 100% 39%;
+            --primary-foreground: 0 0% 98%;
+            --primary-glow: 195 100% 50%;
+            --secondary: 195 53% 15%;
+            --secondary-foreground: 0 0% 98%;
+            --accent: 186 100% 94%;
+            --accent-foreground: 195 100% 25%;
+            --muted: 240 4.8% 15.9%;
+            --muted-foreground: 240 5% 64.9%;
+            --border: 240 3.7% 15.9%;
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+            --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(195 53% 15%));
+            --gradient-card: linear-gradient(145deg, hsl(195 53% 15%), hsl(195 53% 12%));
+            --gradient-hero: linear-gradient(135deg, hsl(195 100% 39%), hsl(195 53% 25%), hsl(195 100% 25%));
+
+            /* Shadows */
+            --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+            --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.4);
+            --shadow-ocean: 0 8px 32px hsl(195 100% 39% / 0.2);
+
+            /* Transitions */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gradient-subtle);
+            color: hsl(var(--foreground));
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fade-up 0.6s ease-out forwards;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 256px;
+            height: 100vh;
+            background: var(--gradient-hero);
+            color: white;
+            padding: 24px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            z-index: 40;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar-header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .sidebar-title {
+            font-size: 30px;
+            font-weight: bold;
+            background: linear-gradient(to right, #fde047, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sidebar-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 8px;
+        }
+
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0px;
+            padding: 0px 0px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .sidebar-footer {
+            margin-top: 32px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(12px);
+        }
+
+        .sidebar-footer h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-footer p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* Mobile menu button */
+        .menu-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 50;
+            background: hsl(var(--primary));
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .menu-toggle:hover {
+            background: hsl(var(--primary) / 0.8);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 30;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            background: var(--gradient-hero);
+            color: white;
+            padding: 60px 32px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-elegant);
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* From Uiverse.io by vinodjangid07 */
+        .tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            background-color: rgb(252, 252, 252);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background-color: rgb(223, 223, 223);
+        }
+
+        /* IEEE Format Content Styles */
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .content-grid {
+            display: grid;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .content-box {
+            background: var(--gradient-card);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: var(--shadow-ocean);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .content-box:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .content-box h2 {
+            color: hsl(var(--primary-glow));
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .content-box h3 {
+            color: hsl(var(--primary));
+            font-size: 20px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .content-box p {
+            color: hsl(var(--foreground));
+            margin-bottom: 16px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .content-box ul {
+            color: hsl(var(--foreground));
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        .content-box li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            box-shadow: var(--shadow-elegant);
+            border: none;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--foreground));
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .main {
+                margin-left: 256px;
+                padding: 24px;
+            }
+
+            .sidebar {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .overlay {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main {
+                padding: 16px;
+            }
+
+            .content-box {
+                padding: 24px;
+            }
+
+            .content-box h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">
+        <span id="menu-icon">☰</span>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">NFIET-2025</h2>
+            <p class="sidebar-subtitle">National Conference</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- Home -->
+            <a href="index.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 104 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="width: 28px; height: 28px;">
+                            <path
+                                d="M100.5 40.75V96.5H66V68.5V65H62.5H43H39.5V68.5V96.5H3.5V40.75L52 4.375L100.5 40.75Z"
+                                stroke="white" stroke-width="7" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Home</span>
+            </a>
+
+            <!-- Conference Themes (document icon) -->
+            <a href="themes.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
+                            <polyline points="14 2 14 8 20 8" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Conference Themes</span>
+            </a>
+
+            <!-- Important Dates (calendar icon) -->
+            <a href="timeline.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Important Dates</span>
+            </a>
+
+            <a href="poster.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="26px" height="26px" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Poster</span>
+            </a>
+
+            <!-- IEEE Format (current page) -->
+            <a href="ieee-format.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                    </div>
+                </span>
+                <span>IEEE Format</span>
+            </a>
+
+            <!-- Registration (people icon) -->
+            <a href="register.html" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Registration</span>
+            </a>
+
+            <!-- Contact (phone icon) -->
+            <a href="#contact" class="sidebar-link" onclick="closeSidebar()">
+                <span>
+                    <div class="tab" style="background-color: transparent;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <path
+                                d="M22 16.92V21a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.07 12.8 19.86 19.86 0 0 1 0 4.18 2 2 0 0 1 2 2h4.09a2 2 0 0 1 2 1.72c.12.9.37 1.77.72 2.58a2 2 0 0 1-.45 2.11L7 10a16 16 0 0 0 7 7l1.59-1.36a2 2 0 0 1 2.11-.45c.81.35 1.68.6 2.58.72A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                </span>
+                <span>Contact</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <h4>Organized by</h4>
+            <p>Department of Electronics & Telecommunication, SVPCET Nagpur</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <div class="header animate-fade-up">
+            <h1>IEEE Format Guidelines</h1>
+            <p>Comprehensive guide for manuscript preparation and submission</p>
+        </div>
+
+        <div class="content-container">
+            <div class="content-grid">
+
+                <!-- Publication Box -->
+                <div class="content-box animate-fade-up">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 28px; height: 28px; display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+                        </svg>
+                        Publication
+                    </h2>
+                    <h3>
+                        TITLE OF YOUR MANUSCRIPT (TIMES NEW ROMAN Bold 14pt centered)
+                    </h3>
+                    <h4>
+                        Author A1, Author B2, and Author C3 (Times New Roman 12pt Bold centered)
+                    </h4>
+                    <p></p>
+                    <p>
+                        1. Institution 1(Times New Roman 11pt centered) <br>
+                        2. Institution 2 (Times New Roman 11pt centered) <br>
+                        3. Institution 3 (Times New Roman 11pt centered) <br>
+                        E-mail (corresponding author)
+                    </p>
+                    <p>
+                        Keywords (at least 4-5): Times New Roman, 12 pt bold
+                    </p>
+                    <h3>
+                        Guidelines for manuscript:
+                    </h3>
+                    <p>
+                        1. The manuscript should be prepared in single column format. The manuscript must contain the
+                        following sections: Introduction, Methodology, Findings, Conclusion, and References. Sections
+                        can be named differently, and subsections may be included.
+                    </p>
+                    <p>
+                        2. The manuscript must be submitted as a Microsoft Word document. All
+                        images (illustrations, charts, photos) must be placed in the text just after the first
+                        point of reference.
+                    </p>
+                    <p>
+                        3. Tables must be created using the Microsoft Word table functions and included as
+                        part of the text immediately after the first point of reference. Do not place them at
+                        the end of your manuscript.
+                    </p>
+                    <p>
+                        4. All reference items must be in 8 pt font. Please use APA style for references.
+                    </p>
+                    <p>
+                        5. Formatting Instructions: <br>
+                        ---Heading 1: Times New Roman, 12 pt bold <br>
+                        ---Heading 2: Times New Roman, 12 pt <br>
+                        ---Heading 3: Times New Roman, 12 pt italics <br>
+                        ---Body text: Times New Roman 11 pt <br>
+                    </p>
+
+                    <!-- <p>
+                        The National Conference on Future Innovation Engineering & Technology (NFIET-2025) welcomes original research contributions from academia, industry, and research organizations worldwide. All accepted papers will be considered for publication in reputed journals and conference proceedings.
+                    </p>
+                    <p>
+                        Papers should present novel theoretical insights, innovative methodologies, experimental results, or practical applications in the fields of Electronics, Telecommunication, Computer Science, and emerging technologies. The conference proceedings will be made available through IEEE Xplore Digital Library, ensuring wide visibility and accessibility of your research work.
+                    </p>
+                    <p>
+                        High-quality papers may be recommended for special issues of partner journals. Authors are encouraged to submit comprehensive research that contributes to the advancement of future innovation engineering and technology.
+                    </p> -->
+                </div>
+
+                <!-- Preparation of Manuscripts Box -->
+                <div class="content-box animate-fade-up">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 28px; height: 28px; display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                            <path d="m18.5 2.5 a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                        </svg>
+                        Preparation of Manuscripts
+                    </h2>
+                    <!-- <p>
+                        All manuscripts must be prepared according to the IEEE standard format. Please ensure your paper
+                        adheres to the following guidelines for successful submission and review process.
+                    </p>
+
+                    <h3>Format Requirements</h3>
+                    <ul>
+                        <li>Use the official IEEE conference paper template (A4 size, two-column format)</li>
+                        <li>Maximum length: 6 pages including references, figures, and tables</li>
+                        <li>Font: Times New Roman, 10pt for body text</li>
+                        <li>Margins: 0.75" (19mm) on all sides</li>
+                        <li>Line spacing: Single space</li>
+                        <li>File format: PDF only (no Word documents accepted)</li>
+                    </ul>
+
+                    <h3>Content Structure</h3>
+                    <ul>
+                        <li>Title: Concise and descriptive (maximum 15 words)</li>
+                        <li>Authors and affiliations with contact information</li>
+                        <li>Abstract: 150-250 words summarizing key contributions</li>
+                        <li>Keywords: 4-6 relevant keywords</li>
+                        <li>Introduction, Literature Review, Methodology, Results, Conclusion</li>
+                        <li>References: IEEE citation style (minimum 15 recent references)</li>
+                    </ul> -->
+
+                    <a href="IEEE-Template.pdf" class="btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 20px; height: 20px; margin-right: 8px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download IEEE Format Template
+                    </a>
+                </div>
+
+                <!-- Instructions for Manuscripts Box -->
+                <div class="content-box animate-fade-up">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="width: 28px; height: 28px; display: inline-block; margin-right: 8px; vertical-align: middle;">
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+                            <path d="m16 4 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                            <path d="M12 11h4" />
+                            <path d="M12 16h4" />
+                            <path d="M8 11h.01" />
+                            <path d="M8 16h.01" />
+                        </svg>
+                        Instructions for Manuscripts
+                    </h2>
+
+                    <h3>Submission Guidelines</h3>
+                    <p>
+                        Please carefully review and follow these detailed instructions to ensure your manuscript meets
+                        all requirements for the conference review process.
+                    </p>
+
+                    <h3>Technical Requirements</h3>
+                    <ul>
+                        <li><strong>Language:</strong> English only, with proper grammar and spelling</li>
+                        <li><strong>Originality:</strong> Must be original work, not previously published</li>
+                        <li><strong>Plagiarism:</strong> All submissions will be checked for plagiarism (max 15%
+                            similarity allowed)</li>
+                        <li><strong>Figures:</strong> High resolution (300 DPI minimum), properly labeled</li>
+                        <li><strong>Tables:</strong> Clear formatting with appropriate captions</li>
+                        <li><strong>Equations:</strong> Numbered sequentially and properly formatted</li>
+                    </ul>
+
+                    <h3>Review Process</h3>
+                    <ul>
+                        <li>Double-blind peer review by at least 3 expert reviewers</li>
+                        <li>Review criteria: Technical quality, novelty, clarity, significance</li>
+                        <li>Notification of acceptance/rejection via email</li>
+                        <li>Camera-ready submission required for accepted papers</li>
+                    </ul>
+
+                    <!-- <h3>Presentation Requirements</h3>
+                    <ul>
+                        <li>Accepted papers must be presented at the conference</li>
+                        <li>Presentation time: 15 minutes + 5 minutes Q&A</li>
+                        <li>PowerPoint slides required (template will be provided)</li>
+                        <li>At least one author must register and attend the conference</li>
+                        <li>Non-presentation may result in exclusion from proceedings</li>
+                    </ul> -->
+
+                    <h3>Ethical Considerations</h3>
+                    <ul>
+                        <li>Research involving human subjects must have ethical approval</li>
+                        <li>Conflicts of interest must be declared</li>
+                        <li>All co-authors must approve the final submission</li>
+                        <li>IEEE code of ethics must be followed</li>
+                    </ul>
+
+                    <h3>Contact Information</h3>
+                    <p>
+                        For technical queries regarding manuscript preparation, please contact the technical committee
+                        at:
+                        <strong>nfiet2025@stvincentngp.edu.in</strong> <br>
+                        More options to contact us are available in the Contact section.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+            menuIcon.textContent = sidebar.classList.contains('open') ? '×' : '☰';
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.overlay');
+            const menuIcon = document.getElementById('menu-icon');
+
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            menuIcon.textContent = '☰';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-up animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.content-box').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
+</body>
+
+</html>
